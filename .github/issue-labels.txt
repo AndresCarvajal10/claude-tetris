@@ -1,0 +1,14 @@
+type: bug|d73a4a|Comportamiento incorrecto o inesperado del juego
+type: enhancement|a2eeef|Mejora o nueva funcionalidad propuesta
+type: question|d876e3|Pregunta o duda sobre el proyecto
+type: docs|0075ca|Relacionado con documentación (README, CLAUDE.md, comentarios)
+area: gameplay|f9d0c4|Piezas, colisión, rotación, wall kicks, line clearing
+area: rendering|fef2c0|Dibujo en canvas, ghost piece, preview de la siguiente pieza
+area: controls|c5def5|Entrada de teclado, pausa, movimiento
+area: scoring|bfd4f2|Puntuación, niveles, velocidad de caída
+area: ui|d4c5f9|HTML/CSS, overlay de pausa/game over, panel lateral
+area: ci|ededed|Workflows de GitHub Actions y automatización
+priority: high|b60205|Bloquea el juego o rompe una mecánica core
+priority: medium|fbca04|Afecta la experiencia pero tiene solución sencilla o workaround
+priority: low|0e8a16|Cosmético o de bajo impacto
+needs-info|e4e669|Falta información para poder diagnosticar el problema
