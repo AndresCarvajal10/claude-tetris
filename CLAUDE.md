@@ -38,9 +38,10 @@ Three files cooperate, no modules/bundler:
   - **Leveling/speed**: level increases every 10 lines; `dropInterval = max(100, 1000 - (level - 1) * 90)` ms.
   - **Ghost piece** (`ghostY`): projects the current piece straight down to its landing row, drawn at `globalAlpha = 0.2`.
   - **Bomb power-up**: a special 1×1 piece (`type = BOMB_TYPE`, spawn chance `BOMB_CHANCE` in `randomPiece`) drawn as a fuse-and-circle. On lock, `lockPiece` calls `explode` instead of `merge`/`clearLines`, clearing the 3×3 area centered on the bomb (board bounds are clipped, nothing above falls), awarding `BOMB_CELL_SCORE * level` per destroyed cell, and triggering a brief orange flash in `draw()`.
+  - **Skins**: `SKINS` (`retro | neon | pastel | pixel`) each define `colors` (index 0 null + 8 incl. bomb), `boardBg` (null = CSS theme bg), `gridColor` (null = theme grid) and a `drawBlock` function; `drawBlock` routes through `SKINS[currentSkin]`. `<select id="skin-select">` + `applySkin`/`initSkin` persist the choice in `localStorage` key `tetris-skin` and redraw immediately. The bomb shape is shared across skins.
 
 Control flow: `init()` builds the board, seeds `next`, calls `spawn()`, and starts the `requestAnimationFrame` loop. `spawn()` promotes `next` to `current` and generates a new `next`; if the newly spawned piece immediately collides, `endGame()` fires and the Game Over overlay is shown. Keyboard input (`keydown` listener) handles movement/rotation/soft-drop/hard-drop/pause; `P` toggles pause via `togglePause()`.
 
 ## Tunable constants (in `game.js`)
 
-`COLS`, `ROWS`, `BLOCK` (cell pixel size), `COLORS`, `LINE_SCORES`, `dropInterval`, `BOMB_CHANCE` (bomb piece spawn probability), `BOMB_CELL_SCORE`. If `COLS`/`ROWS`/`BLOCK` change, update the `width`/`height` attributes of `<canvas id="board">` in `index.html` to match (`COLS × BLOCK` by `ROWS × BLOCK`).
+`COLS`, `ROWS`, `BLOCK` (cell pixel size), `COLORS`, `LINE_SCORES`, `dropInterval`, `BOMB_CHANCE` (bomb piece spawn probability), `BOMB_CELL_SCORE`, `SKINS` (per-skin palettes/backgrounds). If `COLS`/`ROWS`/`BLOCK` change, update the `width`/`height` attributes of `<canvas id="board">` in `index.html` to match (`COLS × BLOCK` by `ROWS × BLOCK`).

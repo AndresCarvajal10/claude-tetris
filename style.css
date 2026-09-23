@@ -190,6 +190,17 @@ kbd {
   transform: translateX(16px);
 }
 
+/* ---- Selector de skin ---- */
+#skin-select {
+  background: var(--kbd-bg);
+  color: var(--text);
+  border: 1px solid var(--kbd-border);
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 12px;
+  font-family: inherit;
+}
+
 /* ---- Overlay ---- */
 .overlay {
   position: absolute;
