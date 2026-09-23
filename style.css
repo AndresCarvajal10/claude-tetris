@@ -25,6 +25,9 @@
   --restart-hover: #9bbdff;
   --switch-bg: #3a3a5a;
   --switch-knob: #e0e0e0;
+  --menu-btn-bg: #22223a;
+  --menu-btn-border: #3a3a5a;
+  --menu-btn-hover: #2f2f50;
 }
 
 body.light {
@@ -48,6 +51,9 @@ body.light {
   --restart-hover: #5c7ce0;
   --switch-bg: #c0c0d4;
   --switch-knob: #ffffff;
+  --menu-btn-bg: #e4e4ee;
+  --menu-btn-border: #c0c0d4;
+  --menu-btn-hover: #d4d4e4;
 }
 
 body {
@@ -243,4 +249,74 @@ kbd {
 
 #restart-btn:hover {
   background: var(--restart-hover);
+}
+
+/* ---- Menú de pausa ---- */
+#pause-menu {
+  z-index: 2;
+}
+
+.menu-box {
+  width: 200px;
+}
+
+.menu-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: var(--overlay-title-color);
+}
+
+.menu-btn {
+  width: 100%;
+  background: var(--menu-btn-bg);
+  color: var(--text);
+  border: 1px solid var(--menu-btn-border);
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.menu-btn:hover,
+.menu-btn:focus-visible {
+  background: var(--menu-btn-hover);
+  outline: 2px solid var(--value-color);
+}
+
+.menu-controls {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--controls-text);
+  text-align: left;
+}
+
+.menu-controls.hidden {
+  display: none;
+}
+
+.menu-controls li {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.menu-level {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+
+.menu-level select {
+  background: var(--menu-btn-bg);
+  color: var(--text);
+  border: 1px solid var(--menu-btn-border);
+  border-radius: 4px;
+  padding: 4px 6px;
 }
