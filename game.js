@@ -57,6 +57,7 @@ const startLevelSelect = document.getElementById('start-level');
 const START_LEVEL_KEY = 'tetris-start-level';
 const MAX_START_LEVEL = 10;
 let startLevel = 1;
+let levelFloor = 1;
 
 const THEME_KEY = 'tetris-theme';
 const GRID_COLOR = { dark: '#22222e', light: '#d8d8e4' };
@@ -142,7 +143,7 @@ function clearLines() {
   if (cleared) {
     lines += cleared;
     score += (LINE_SCORES[cleared] || 0) * level;
-    level = Math.max(startLevel, Math.floor(lines / 10) + 1);
+    level = Math.max(levelFloor, Math.floor(lines / 10) + 1);
     dropInterval = Math.max(100, 1000 - (level - 1) * 90);
     updateHUD();
   }
@@ -331,13 +332,14 @@ function endGame() {
 }
 
 function initStartLevel() {
-  const n = parseInt(localStorage.getItem(START_LEVEL_KEY), 10);
+  let n = NaN;
+  try { n = parseInt(localStorage.getItem(START_LEVEL_KEY), 10); } catch (e) {}
   startLevel = n >= 1 && n <= MAX_START_LEVEL ? n : 1;
   for (let i = 1; i <= MAX_START_LEVEL; i++) startLevelSelect.add(new Option(i, i));
   startLevelSelect.value = startLevel;
   startLevelSelect.addEventListener('change', () => {
     startLevel = parseInt(startLevelSelect.value, 10) || 1;
-    localStorage.setItem(START_LEVEL_KEY, startLevel);
+    try { localStorage.setItem(START_LEVEL_KEY, startLevel); } catch (e) {}
   });
 }
 
@@ -385,7 +387,7 @@ function init() {
   board = createBoard();
   score = 0;
   lines = 0;
-  level = startLevel;
+  level = levelFloor = startLevel;
   paused = false;
   gameOver = false;
   dropInterval = Math.max(100, 1000 - (level - 1) * 90);
