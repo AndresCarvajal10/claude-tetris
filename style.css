@@ -25,6 +25,9 @@
   --restart-hover: #9bbdff;
   --switch-bg: #3a3a5a;
   --switch-knob: #e0e0e0;
+  --rec-highlight-bg: rgba(255, 213, 79, 0.22);
+  --rec-highlight-text: #ffd54f;
+  --rec-line: #2a2a3a;
 }
 
 body.light {
@@ -48,6 +51,9 @@ body.light {
   --restart-hover: #5c7ce0;
   --switch-bg: #c0c0d4;
   --switch-knob: #ffffff;
+  --rec-highlight-bg: rgba(59, 91, 219, 0.15);
+  --rec-highlight-text: #3b5bdb;
+  --rec-line: #c8c8d8;
 }
 
 body {
@@ -243,4 +249,121 @@ kbd {
 
 #restart-btn:hover {
   background: var(--restart-hover);
+}
+
+/* ---- Records ---- */
+#start-screen {
+  z-index: 2;
+}
+
+.start-title {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 6px;
+  color: var(--value-color);
+}
+
+.records-table {
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 260px;
+}
+
+.records-table th {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--label-color);
+  text-align: left;
+  padding: 3px 8px;
+}
+
+.records-table td {
+  padding: 4px 8px;
+  border-top: 1px solid var(--rec-line);
+  text-align: left;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.records-table .records-empty {
+  text-align: center;
+  color: var(--label-color);
+}
+
+.records-table tr.records-highlight td {
+  background: var(--rec-highlight-bg);
+  color: var(--rec-highlight-text);
+  font-weight: 700;
+}
+
+.records-stats {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--controls-text);
+}
+
+.records-extra {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.records-extra.hidden,
+.name-form.hidden {
+  display: none;
+}
+
+.name-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--rec-highlight-text);
+}
+
+.name-row {
+  display: flex;
+  gap: 6px;
+}
+
+#name-input {
+  user-select: text;
+  background: var(--board-bg);
+  color: var(--text);
+  border: 1px solid var(--board-border);
+  border-radius: 4px;
+  padding: 6px 8px;
+  width: 150px;
+}
+
+#save-name-btn,
+.primary-btn {
+  background: var(--restart-bg);
+  color: var(--restart-text);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-btn {
+  padding: 10px 28px;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.reset-records-btn {
+  background: transparent;
+  color: var(--controls-text);
+  border: 1px solid var(--board-border);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.reset-records-btn:hover {
+  color: var(--overlay-title-color);
+  border-color: var(--overlay-title-color);
 }
