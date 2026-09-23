@@ -37,9 +37,10 @@ Three files cooperate, no modules/bundler:
   - **Scoring**: `LINE_SCORES = [0, 100, 300, 500, 800]` multiplied by current `level`; hard drop adds 2 pts/cell, soft drop adds 1 pt/row.
   - **Leveling/speed**: level increases every 10 lines; `dropInterval = max(100, 1000 - (level - 1) * 90)` ms.
   - **Ghost piece** (`ghostY`): projects the current piece straight down to its landing row, drawn at `globalAlpha = 0.2`.
+  - **Bomb power-up**: a special 1×1 piece (`type = BOMB_TYPE`, spawn chance `BOMB_CHANCE` in `randomPiece`) drawn as a fuse-and-circle. On lock, `lockPiece` calls `explode` instead of `merge`/`clearLines`, clearing the 3×3 area centered on the bomb (board bounds are clipped, nothing above falls), awarding `BOMB_CELL_SCORE * level` per destroyed cell, and triggering a brief orange flash in `draw()`.
 
 Control flow: `init()` builds the board, seeds `next`, calls `spawn()`, and starts the `requestAnimationFrame` loop. `spawn()` promotes `next` to `current` and generates a new `next`; if the newly spawned piece immediately collides, `endGame()` fires and the Game Over overlay is shown. Keyboard input (`keydown` listener) handles movement/rotation/soft-drop/hard-drop/pause; `P` toggles pause via `togglePause()`.
 
 ## Tunable constants (in `game.js`)
 
-`COLS`, `ROWS`, `BLOCK` (cell pixel size), `COLORS`, `LINE_SCORES`, `dropInterval`. If `COLS`/`ROWS`/`BLOCK` change, update the `width`/`height` attributes of `<canvas id="board">` in `index.html` to match (`COLS × BLOCK` by `ROWS × BLOCK`).
+`COLS`, `ROWS`, `BLOCK` (cell pixel size), `COLORS`, `LINE_SCORES`, `dropInterval`, `BOMB_CHANCE` (bomb piece spawn probability), `BOMB_CELL_SCORE`. If `COLS`/`ROWS`/`BLOCK` change, update the `width`/`height` attributes of `<canvas id="board">` in `index.html` to match (`COLS × BLOCK` by `ROWS × BLOCK`).
